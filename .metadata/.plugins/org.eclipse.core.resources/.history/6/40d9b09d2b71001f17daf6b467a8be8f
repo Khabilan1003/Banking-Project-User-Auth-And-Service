@@ -1,0 +1,5 @@
+package com.banking.oracle.service;
+
+public class AuthService {
+
+}

@@ -1,0 +1,5 @@
+package com.banking.oracle.repository;
+
+public class UserRolesRepository {
+
+}

@@ -1,0 +1,10 @@
+package com.banking.oracle.entity;
+
+import jakarta.persistence.Entity;
+
+@Entity(name = "role")
+public class Role {
+
+	int roleId;
+	String roleName;
+}

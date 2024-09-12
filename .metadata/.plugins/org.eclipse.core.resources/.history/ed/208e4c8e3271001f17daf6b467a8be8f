@@ -1,0 +1,7 @@
+package com.banking.oracle.dao;
+
+import java.util.List;
+
+public interface UserDAO {
+	User get(String username);
+}

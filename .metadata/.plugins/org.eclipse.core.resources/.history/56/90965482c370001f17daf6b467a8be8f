@@ -1,0 +1,12 @@
+CREATE TABLE Branch (
+    branchCode INT NOT NULL,
+    branchName VARCHAR(255),
+    ifscCode VARCHAR(50),
+    PRIMARY KEY (branchCode)
+);
+
+CREATE TABLE Role (
+    roleId INT NOT NULL,
+    roleName VARCHAR(100),
+    PRIMARY KEY (roleId)
+);

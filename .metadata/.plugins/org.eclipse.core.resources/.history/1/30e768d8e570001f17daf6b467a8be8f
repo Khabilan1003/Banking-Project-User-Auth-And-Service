@@ -1,0 +1,33 @@
+package com.banking.oracle.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.banking.oracle.dao.branch.BranchDAO;
+import com.banking.oracle.dao.role.RoleDAO;
+import com.banking.oracle.dao.user.UserDAO;
+import com.banking.oracle.dao.userroles.UserRoles;
+import com.banking.oracle.dao.userroles.UserRolesDAO;
+
+@RestController
+@RequestMapping("/user")
+public class UserController {
+	@Autowired
+	private UserDAO userDAO;
+	
+	@Autowired
+	private BranchDAO branchDAO;
+	
+	@Autowired
+	private RoleDAO roleDAO;
+	
+	@Autowired
+	private UserRolesDAO userRolesDAO;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+	
+	
+}

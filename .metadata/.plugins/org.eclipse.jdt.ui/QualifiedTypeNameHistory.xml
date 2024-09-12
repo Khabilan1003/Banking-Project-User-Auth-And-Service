@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="jakarta.persistence.Table"/>
+    <fullyQualifiedTypeName name="jakarta.persistence.Id"/>
+    <fullyQualifiedTypeName name="com.banking.oracle.entity.User"/>
+    <fullyQualifiedTypeName name="com.banking.oracle.entity.Role"/>
+    <fullyQualifiedTypeName name="antlr.collections.List"/>
+</qualifiedTypeNameHistroy>

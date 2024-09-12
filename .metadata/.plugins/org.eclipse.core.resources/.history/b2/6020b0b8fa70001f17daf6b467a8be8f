@@ -1,0 +1,17 @@
+package com.banking.oracle.service.model;
+
+import java.util.List;
+
+import com.banking.oracle.dao.branch.Branch;
+import com.banking.oracle.dao.role.Role;
+
+public class UserRequestModel {
+	String firstname;
+	String lastname;
+	String username;
+	String password;
+	Branch branch;
+	List<Role> roles;
+	String phoneNumber;
+	String email;
+}

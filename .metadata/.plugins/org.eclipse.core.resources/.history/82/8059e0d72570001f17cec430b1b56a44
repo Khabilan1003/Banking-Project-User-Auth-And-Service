@@ -1,0 +1,5 @@
+package com.banking.oracle.entity;
+
+public class User {
+
+}

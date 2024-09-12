@@ -1,0 +1,5 @@
+package com.banking.oracle.dao.role;
+
+public class RoleDAOImplementation {
+
+}

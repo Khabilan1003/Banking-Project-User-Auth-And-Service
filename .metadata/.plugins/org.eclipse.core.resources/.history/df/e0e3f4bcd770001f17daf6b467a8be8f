@@ -1,0 +1,56 @@
+package com.banking.oracle.dao.userroles;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.banking.oracle.config.DatabaseConfig;
+
+public class UserRolesImplementation implements UserRolesDAO {
+	Connection conn;
+
+	public UserRolesImplementation() {
+		conn = DatabaseConfig.getConnection();
+	}
+
+	@Override
+	public List<UserRoles> getByUserId(Integer userId) {
+		List<UserRoles> userRoles = new ArrayList<>();
+		try {
+			Statement statement = conn.createStatement();
+			ResultSet result = statement.executeQuery("SELECT * FROM userRoles where userId = " + userId);
+			while (result.next()) {
+				userRoles.add(new UserRoles(result.getInt("userId"), result.getInt("roleId")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return userRoles;
+	}
+
+	@Override
+	public boolean create(UserRoles userRole) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean deleteByUserId(Integer userId) {
+		try {
+			PreparedStatement pst = conn.prepareStatement("delete from userRoles where userId=?");
+			pst.setInt(1, userId);
+			int rows = pst.executeUpdate();
+			if (rows > 0)
+				return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+}

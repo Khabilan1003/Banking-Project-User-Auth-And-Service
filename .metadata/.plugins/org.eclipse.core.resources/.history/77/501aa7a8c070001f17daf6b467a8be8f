@@ -1,0 +1,9 @@
+package com.banking.oracle.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.banking.oracle.dao.branch.Branch;
+
+public interface BranchRepository extends JpaRepository<Branch, Integer> {
+
+}

@@ -1,0 +1,50 @@
+package com.banking.oracle.dao.role;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.banking.oracle.config.DatabaseConfig;
+
+@Service
+public class RoleDAOImplementation implements RoleDAO {
+	Connection conn;
+
+	public RoleDAOImplementation() {
+		conn = DatabaseConfig.getConnection();
+	}
+	
+	@Override
+	public boolean create(Role role) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean update(Role role) {
+		if(role == null || role.getRoleId)
+	}
+
+	@Override
+	public boolean delete(Role role) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public List<Role> get() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Role getByRoleId(Integer roleId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+}

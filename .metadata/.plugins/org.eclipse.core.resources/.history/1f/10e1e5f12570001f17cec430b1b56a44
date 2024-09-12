@@ -1,0 +1,12 @@
+package com.banking.oracle.entity;
+
+public class User {
+	int userId;
+	String firstname;
+	String lastname;
+	String username;
+	String password;
+	int branchCode;
+	String phoneNumber;
+	String email;
+}

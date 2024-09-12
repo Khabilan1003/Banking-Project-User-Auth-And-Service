@@ -1,0 +1,17 @@
+package com.banking.oracle.dao.branch;
+
+import java.util.List;
+
+import com.banking.oracle.dao.role.Role;
+
+public interface BranchDAO {
+	List<Branch> get();
+	
+	Role getByRoleId(Integer roleId);
+
+	boolean update(Role role);
+
+	boolean delete(Integer roleId);
+
+	boolean create(Role role);
+}

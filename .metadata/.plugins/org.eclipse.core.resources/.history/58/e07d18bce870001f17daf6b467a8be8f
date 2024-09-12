@@ -1,0 +1,58 @@
+package com.banking.oracle.service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+
+import com.banking.oracle.dao.branch.Branch;
+import com.banking.oracle.dao.branch.BranchDAO;
+import com.banking.oracle.dao.role.Role;
+import com.banking.oracle.dao.role.RoleDAO;
+import com.banking.oracle.dao.user.User;
+import com.banking.oracle.dao.user.UserDAO;
+import com.banking.oracle.dao.userroles.UserRoles;
+import com.banking.oracle.dao.userroles.UserRolesDAO;
+import com.banking.oracle.service.model.UserResponseModel;
+
+@Service
+public class UserService {
+	@Autowired
+	private UserDAO userDAO;
+
+	@Autowired
+	private BranchDAO branchDAO;
+
+	@Autowired
+	private RoleDAO roleDAO;
+
+	@Autowired
+	private UserRolesDAO userRolesDAO;
+
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+
+	public UserResponseModel getUserById(Integer userId) {
+		User user = userDAO.get(userId);
+		Branch branch = branchDAO.getByBranchCode(user.getBranchCode());
+		List<UserRoles> userRoles = userRolesDAO.getByUserId(userId);
+		List<Role> roles = new ArrayList<>();
+		for(UserRoles userRole : userRoles) {
+			roles.add(roleDAO.getByRoleId(userRole.getRoleId()));
+		}
+		
+		UserResponseModel userResponse = new UserResponseModel();
+		userResponse.setUserId(user.getUserId());
+		userResponse.setFirstname(user.getFirstname());
+		userResponse.setLastname(user.getLastname());
+		userResponse.setUsername(user.getUsername());
+		userResponse.setBranch(branch);
+		userResponse.setRoles(roles);
+		userResponse.setEmail(user.getEmail());
+		userResponse.setPhoneNumber(user.getPhoneNumber());
+		
+		return userResponse;
+	}
+}

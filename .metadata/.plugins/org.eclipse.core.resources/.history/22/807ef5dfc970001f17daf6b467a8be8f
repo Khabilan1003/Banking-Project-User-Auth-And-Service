@@ -1,0 +1,70 @@
+package com.banking.oracle.dao.branch;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.banking.oracle.config.DatabaseConfig;
+import com.banking.oracle.dao.role.Role;
+
+public class BranchDAOImplementation implements BranchDAO {
+	Connection conn;
+	
+	public BranchDAOImplementation() {
+		conn = DatabaseConfig.getConnection();
+	}
+	
+	@Override
+	public List<Branch> get() {
+		List<Branch> branches = new ArrayList<>();
+		try {
+			Statement statement = conn.createStatement();
+			ResultSet result = statement.executeQuery("SELECT * FROM branch");
+			while (result.next()) {
+				branches.add(new Branch(result.getInt("branchCode"), result.getString("branchName") , result.getString("ifscCode")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return branches;
+	}
+
+	@Override
+	public Role getByBranchCode(Integer branchCode) {
+		Branch branch = null;
+		try {
+			Statement statement = conn.createStatement();
+			ResultSet result = statement.executeQuery("SELECT * FROM branch");
+			while (result.next()) {
+				branch = new Branch(result.getInt("branchCode"), result.getString("branchName") , result.getString("ifscCode"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return branches;
+	}
+
+	@Override
+	public boolean update(Branch branch) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean delete(Integer branchCode) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean create(Branch branch) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+}

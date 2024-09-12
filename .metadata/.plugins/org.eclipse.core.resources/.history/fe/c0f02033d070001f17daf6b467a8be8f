@@ -1,0 +1,12 @@
+package com.banking.oracle.dao.user;
+
+import java.util.List;
+
+public interface UserDAO {
+	boolean create(User user);
+	User get(Integer userId);
+	User get(String username);
+	List<User> getAll();
+	boolean update(User user);
+	boolean deleteById(Integer userId);
+}

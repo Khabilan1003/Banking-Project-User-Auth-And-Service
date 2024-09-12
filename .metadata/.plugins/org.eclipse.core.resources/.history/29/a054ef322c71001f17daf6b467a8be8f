@@ -1,0 +1,32 @@
+package com.banking.oracle.config;
+
+import org.springframework.security.core.userdetails.UserDetails;
+
+public class CustomUserDetails implements UserDetails {
+
+	private String username;
+	private String password;
+
+	public CustomUserDetails(UserCredential userCredential) {
+		this.username = userCredential.getName();
+		this.password = userCredential.getPassword();
+	}
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getPassword() {
+		// TODO Auto-generated method stub
+		return password;
+	}
+
+	@Override
+	public String getUsername() {
+		// TODO Auto-generated method stub
+		return username;
+	}
+}

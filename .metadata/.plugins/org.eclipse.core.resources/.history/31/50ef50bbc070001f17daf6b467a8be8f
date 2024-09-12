@@ -1,0 +1,21 @@
+package com.banking.oracle.dao.branch;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity(name = "branch")
+public class Branch {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="branch_code")
+	int branchCode;
+	
+	@Column(name="branch_name")
+	String branchName;
+	
+	@Column(name="ifsc")
+	String ifscCode;
+}

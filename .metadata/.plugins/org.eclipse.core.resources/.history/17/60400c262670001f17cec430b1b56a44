@@ -1,0 +1,16 @@
+package com.banking.oracle.entity;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+
+@Entity(name = "user")
+public class User {
+	int userId;
+	String firstname;
+	String lastname;
+	String username;
+	String password;
+	int branchCode;
+	String phoneNumber;
+	String email;
+}

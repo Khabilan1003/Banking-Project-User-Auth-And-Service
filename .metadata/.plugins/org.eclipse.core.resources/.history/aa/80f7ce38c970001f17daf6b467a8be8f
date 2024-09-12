@@ -1,0 +1,39 @@
+package com.banking.oracle.dao.branch;
+
+import java.util.List;
+
+import com.banking.oracle.dao.role.Role;
+
+public class BranchDAOImplementation implements BranchDAO {
+
+	@Override
+	public List<Branch> get() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Role getByBranchCode(Integer branchCode) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean update(Branch branch) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean delete(Integer branchCode) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean create(Branch branch) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+}

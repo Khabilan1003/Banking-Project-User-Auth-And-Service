@@ -1,0 +1,5 @@
+package com.banking.oracle.config;
+
+public class DatabaseConfig {
+
+}

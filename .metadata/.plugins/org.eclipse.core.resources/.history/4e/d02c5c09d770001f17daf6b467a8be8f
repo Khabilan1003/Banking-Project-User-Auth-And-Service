@@ -1,0 +1,9 @@
+package com.banking.oracle.dao.userroles;
+
+import java.util.List;
+
+public interface UserRolesDAO {
+	List<UserRoles> getByUserId();
+	boolean create(UserRoles userRole);
+	boolean delete(UserRoles userRole);
+}

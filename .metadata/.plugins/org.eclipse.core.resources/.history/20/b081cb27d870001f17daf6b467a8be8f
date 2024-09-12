@@ -1,0 +1,94 @@
+package com.banking.oracle.dao.userroles;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.banking.oracle.config.DatabaseConfig;
+
+public class UserRolesImplementation implements UserRolesDAO {
+	Connection conn;
+
+	public UserRolesImplementation() {
+		conn = DatabaseConfig.getConnection();
+	}
+
+	@Override
+	public List<UserRoles> getByUserId(Integer userId) {
+		List<UserRoles> userRoles = new ArrayList<>();
+		try {
+			Statement statement = conn.createStatement();
+			ResultSet result = statement.executeQuery("SELECT * FROM userRoles where userId = " + userId);
+			while (result.next()) {
+				userRoles.add(new UserRoles(result.getInt("userId"), result.getInt("roleId")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return userRoles;
+	}
+
+	@Override
+	public boolean create(List<UserRoles> userRoles) {
+	    String sql = "INSERT INTO `userRoles` (`userId`, `roleId`) VALUES (?,?)";
+	    
+	    try (PreparedStatement pst = conn.prepareStatement(sql)) {
+	        // Disable auto-commit to execute all insertions in a batch
+	        conn.setAutoCommit(false);
+
+	        for (Branch branch : branches) {
+	            pst.setInt(1, branch.getBranchCode());
+	            pst.setString(2, branch.getBranchName());
+	            pst.setString(3, branch.getIfscCode());
+	            pst.addBatch(); // Add to the batch
+	        }
+
+	        // Execute the batch
+	        int[] rows = pst.executeBatch();
+	        
+	        // Commit the transaction
+	        conn.commit();
+	        
+	        // If all rows are inserted (rows.length should equal number of branches), return true
+	        return rows.length == branches.size();
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        try {
+	            // Rollback if there’s an error
+	            conn.rollback();
+	        } catch (SQLException rollbackEx) {
+	            rollbackEx.printStackTrace();
+	        }
+	    } finally {
+	        try {
+	            // Restore auto-commit behavior
+	            conn.setAutoCommit(true);
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    }
+
+	    return false;
+	}
+
+	@Override
+	public boolean deleteByUserId(Integer userId) {
+		try {
+			PreparedStatement pst = conn.prepareStatement("delete from userRoles where userId=?");
+			pst.setInt(1, userId);
+			int rows = pst.executeUpdate();
+			if (rows > 0)
+				return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+}
