@@ -1,0 +1,23 @@
+spring:
+ cloud:
+   gateway:
+     routes:
+       - id: user-service
+         uri: lb://USER-SERVICE
+         predicates:
+           - Path=/user/**, /role/**, /branch/**
+         filters:
+           - AuthenticationFilter
+
+       - id: authentication-service
+         uri: lb://AUTHENTICATION-SERVICE
+         predicates:
+           - Path=/auth/**
+
+ application:
+   name: BANKING-GATEWAY
+
+eureka:
+  client:
+    service-url:
+      defaultZone : http://localhost:8761/eureka/
