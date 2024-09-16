@@ -21,7 +21,7 @@ public class UserRolesImplementation implements UserRolesDAO {
 		List<UserRoles> userRoles = new ArrayList<>();
 		try {
 			Statement statement = conn.createStatement();
-			ResultSet result = statement.executeQuery("SELECT * FROM userRoles where userId = " + userId);
+			ResultSet result = statement.executeQuery("SELECT * FROM b2_userRoles_tbl where userId = " + userId);
 			while (result.next()) {
 				userRoles.add(new UserRoles(result.getInt("userId"), result.getInt("roleId")));
 			}
@@ -34,7 +34,7 @@ public class UserRolesImplementation implements UserRolesDAO {
 
 	@Override
 	public boolean create(List<UserRoles> userRoles) {
-		String sql = "INSERT INTO `userRoles` (`userId`, `roleId`) VALUES (?,?)";
+		String sql = "INSERT INTO `b2_userRoles_tbl` (`userId`, `roleId`) VALUES (?,?)";
 		System.out.println("User Roles Create Method");
 		System.out.println(userRoles.size());
 		try {
@@ -57,7 +57,7 @@ public class UserRolesImplementation implements UserRolesDAO {
 	@Override
 	public boolean deleteByUserId(Integer userId) {
 		try {
-			PreparedStatement pst = conn.prepareStatement("delete from userRoles where userId=?");
+			PreparedStatement pst = conn.prepareStatement("delete from b2_userRoles_tbl where userId=?");
 			pst.setInt(1, userId);
 			int rows = pst.executeUpdate();
 			if (rows > 0)

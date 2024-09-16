@@ -6,8 +6,8 @@ spring:
          uri: lb://USER-SERVICE
          predicates:
            - Path=/user/**, /role/**, /branch/**
-         filters:
-           - AuthenticationFilter
+#         filters:
+#           - AuthenticationFilter
 
        - id: authentication-service
          uri: lb://AUTHENTICATION-SERVICE

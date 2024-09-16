@@ -1,5 +1,0 @@
-package com.banking.oracle.service.model;
-
-public class UserUpdateRequestModel {
-
-}

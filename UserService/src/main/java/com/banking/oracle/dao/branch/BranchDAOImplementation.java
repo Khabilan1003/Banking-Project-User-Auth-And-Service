@@ -21,7 +21,7 @@ public class BranchDAOImplementation implements BranchDAO {
 		List<Branch> branches = new ArrayList<>();
 		try {
 			Statement statement = conn.createStatement();
-			ResultSet result = statement.executeQuery("SELECT * FROM branch");
+			ResultSet result = statement.executeQuery("SELECT * FROM b2_branch_tbl");
 			while (result.next()) {
 				branches.add(new Branch(result.getInt("branchCode"), result.getString("branchName") , result.getString("ifscCode")));
 			}
@@ -37,7 +37,7 @@ public class BranchDAOImplementation implements BranchDAO {
 		Branch branch = null;
 		try {
 			Statement statement = conn.createStatement();
-			ResultSet result = statement.executeQuery("SELECT * FROM branch");
+			ResultSet result = statement.executeQuery("SELECT * FROM b2_branch_tbl");
 			if (result.next()) {
 				branch = new Branch(result.getInt("branchCode"), result.getString("branchName") , result.getString("ifscCode"));
 			}
@@ -66,7 +66,7 @@ public class BranchDAOImplementation implements BranchDAO {
 			parameters.add(branch.getIfscCode());
 		}
 
-		String sql = "UPDATE `branch` SET " + String.join(", ", setClauses) + " WHERE branchCode = ?";
+		String sql = "UPDATE `b2_branch_tbl` SET " + String.join(", ", setClauses) + " WHERE branchCode = ?";
 		parameters.add(branch.getBranchCode());
 
 		try (PreparedStatement pst = conn.prepareStatement(sql)) {
@@ -89,7 +89,7 @@ public class BranchDAOImplementation implements BranchDAO {
 	@Override
 	public boolean delete(Integer branchCode) {
 		try {
-			PreparedStatement pst = conn.prepareStatement("delete from branch where branchCode=?");
+			PreparedStatement pst = conn.prepareStatement("delete from b2_branch_tbl where branchCode=?");
 			pst.setInt(1, branchCode);
 			int rows = pst.executeUpdate();
 			if (rows > 0)
@@ -103,7 +103,7 @@ public class BranchDAOImplementation implements BranchDAO {
 	@Override
 	public boolean create(Branch branch) {
 		try {
-			String sql = "INSERT INTO `branch` (" + "`branchCode` , `branchName` , `ifscCode`) " + "VALUES (?,?,?)";
+			String sql = "INSERT INTO `b2_branch_tbl` (" + "`branchCode` , `branchName` , `ifscCode`) " + "VALUES (?,?,?)";
 			PreparedStatement pst = conn.prepareStatement(sql);
 
 			pst.setInt(1, branch.getBranchCode());

@@ -18,7 +18,7 @@ public class UserDAOImplementation implements UserDAO {
 		User user = null;
 		try {
 			Statement statement = conn.createStatement();
-			ResultSet result = statement.executeQuery("SELECT * FROM user WHERE username like '" + username + "'");
+			ResultSet result = statement.executeQuery("SELECT * FROM b2_user_tbl WHERE username like '" + username + "'");
 			if (result.next()) {
 				user = new User(result.getInt(1), result.getString(2), result.getString(3), result.getString(4),
 						result.getString(5), result.getInt(6), result.getString(7), result.getString(8));

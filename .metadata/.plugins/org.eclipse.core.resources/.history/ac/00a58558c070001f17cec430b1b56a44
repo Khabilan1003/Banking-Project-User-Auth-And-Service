@@ -1,7 +1,0 @@
-package com.banking.oracle.dao.user;
-
-import antlr.collections.List;
-
-public interface UserDAO {
-	
-}

@@ -1,6 +1,0 @@
-package com.banking.oracle.dao.role;
-
-public class Role {
-	int roleId;
-	String roleName;
-}

@@ -19,7 +19,7 @@ public class RoleDAOImplementation implements RoleDAO {
 	@Override
 	public boolean create(Role role) {
 		try {
-			String sql = "INSERT INTO `role` (" + "`roleName`) " + "VALUES (?)";
+			String sql = "INSERT INTO `b2_role_tbl` (" + "`roleName`) " + "VALUES (?)";
 			PreparedStatement pst = conn.prepareStatement(sql);
 
 			pst.setString(1, role.getRoleName());
@@ -48,7 +48,7 @@ public class RoleDAOImplementation implements RoleDAO {
 			parameters.add(role.getRoleName());
 		}
 
-		String sql = "UPDATE `role` SET " + String.join(", ", setClauses) + " WHERE roleId = ?";
+		String sql = "UPDATE `b2_role_tbl` SET " + String.join(", ", setClauses) + " WHERE roleId = ?";
 		parameters.add(role.getRoleId());
 
 		try (PreparedStatement pst = conn.prepareStatement(sql)) {
@@ -71,7 +71,7 @@ public class RoleDAOImplementation implements RoleDAO {
 	@Override
 	public boolean delete(Integer roleId) {
 		try {
-			PreparedStatement pst = conn.prepareStatement("delete from role where roleId=?");
+			PreparedStatement pst = conn.prepareStatement("delete from b2_role_tbl where roleId=?");
 			pst.setInt(1, roleId);
 			int rows = pst.executeUpdate();
 			if (rows > 0)
@@ -87,7 +87,7 @@ public class RoleDAOImplementation implements RoleDAO {
 		List<Role> roles = new ArrayList<>();
 		try {
 			Statement statement = conn.createStatement();
-			ResultSet result = statement.executeQuery("SELECT * FROM role");
+			ResultSet result = statement.executeQuery("SELECT * FROM b2_role_tbl");
 			while (result.next()) {
 				roles.add(new Role(result.getInt("roleId"), result.getString("roleName")));
 			}
@@ -103,7 +103,7 @@ public class RoleDAOImplementation implements RoleDAO {
 		Role role = null;
 		try {
 			Statement statement = conn.createStatement();
-			ResultSet result = statement.executeQuery("SELECT * FROM role WHERE roleId = " + roleId);
+			ResultSet result = statement.executeQuery("SELECT * FROM b2_role_tbl WHERE roleId = " + roleId);
 			if (result.next()) {
 				role = new Role(result.getInt("roleId"), result.getString("roleName"));
 			}

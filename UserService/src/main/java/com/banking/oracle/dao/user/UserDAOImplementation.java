@@ -20,7 +20,7 @@ public class UserDAOImplementation implements UserDAO {
 	public Integer create(User user) {
 	    int generatedId = -1; // Initialize the ID to -1 to indicate failure
 	    try {
-	        String sql = "INSERT INTO `user` ("
+	        String sql = "INSERT INTO `b2_user_tbl` ("
 	                + "`firstname` , `lastname` , `username` , `password` , `branchCode` , `phoneNumber` , `email`) "
 	                + "VALUES (?,?,?,?,?,?,?)";
 	        
@@ -58,7 +58,7 @@ public class UserDAOImplementation implements UserDAO {
 		User user = null;
 		try {
 			Statement statement = conn.createStatement();
-			ResultSet result = statement.executeQuery("SELECT * FROM user WHERE userId = " + userId);
+			ResultSet result = statement.executeQuery("SELECT * FROM b2_user_tbl WHERE userId = " + userId);
 			if (result.next()) {
 				user = new User(result.getInt(1), result.getString(2), result.getString(3), result.getString(4),
 						result.getString(5), result.getInt(6), result.getString(7), result.getString(8));
@@ -77,7 +77,7 @@ public class UserDAOImplementation implements UserDAO {
 		User user = null;
 		try {
 			Statement statement = conn.createStatement();
-			ResultSet result = statement.executeQuery("SELECT * FROM user WHERE username = " + username);
+			ResultSet result = statement.executeQuery("SELECT * FROM b2_user_tbl WHERE username = " + username);
 			if (result.next()) {
 				user = new User(result.getInt(1), result.getString(2), result.getString(3), result.getString(4),
 						result.getString(5), result.getInt(6), result.getString(7), result.getString(8));
@@ -96,7 +96,7 @@ public class UserDAOImplementation implements UserDAO {
 		List<User> users = new ArrayList<>();
 		try {
 			Statement statement = conn.createStatement();
-			ResultSet result = statement.executeQuery("SELECT * FROM user");
+			ResultSet result = statement.executeQuery("SELECT * FROM b2_user_tbl");
 			while (result.next()) {
 				users.add(new User(result.getInt(1), result.getString(2), result.getString(3), result.getString(4),
 						result.getString(5), result.getInt(6), result.getString(7), result.getString(8)));
@@ -148,7 +148,7 @@ public class UserDAOImplementation implements UserDAO {
 			parameters.add(user.getBranchCode());
 		}
 
-		String sql = "UPDATE `user` SET " + String.join(", ", setClauses) + " WHERE userId = ?";
+		String sql = "UPDATE `b2_user_tbl` SET " + String.join(", ", setClauses) + " WHERE userId = ?";
 		parameters.add(user.getUserId());
 
 		try (PreparedStatement pst = conn.prepareStatement(sql)) {
@@ -171,7 +171,7 @@ public class UserDAOImplementation implements UserDAO {
 	@Override
 	public boolean deleteById(Integer userId) {
 		try {
-			PreparedStatement pst = conn.prepareStatement("delete from user where userId=?");
+			PreparedStatement pst = conn.prepareStatement("delete from b2_user_tbl where userId=?");
 			pst.setInt(1, userId);
 			int rows = pst.executeUpdate();
 			if (rows > 0)
@@ -187,7 +187,7 @@ public class UserDAOImplementation implements UserDAO {
 		List<User> users = new ArrayList<>();
 		try {
 			Statement statement = conn.createStatement();
-			ResultSet result = statement.executeQuery("SELECT * FROM user where branchCode = " + branchCode);
+			ResultSet result = statement.executeQuery("SELECT * FROM b2_user_tbl where branchCode = " + branchCode);
 			while (result.next()) {
 				users.add(new User(result.getInt(1), result.getString(2), result.getString(3), result.getString(4),
 						result.getString(5), result.getInt(6), result.getString(7), result.getString(8)));

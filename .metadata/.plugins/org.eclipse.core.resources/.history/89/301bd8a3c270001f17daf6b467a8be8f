@@ -1,5 +1,0 @@
-package com.banking.oracle.dao.user;
-
-public interface UserDAO {
-
-}

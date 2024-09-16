@@ -1,9 +1,0 @@
-package com.banking.oracle.entity;
-
-import jakarta.persistence.Entity;
-
-@Entity(name="user_roles")
-public class UserRoles {	
-	int userId;
-	int roleId;
-}

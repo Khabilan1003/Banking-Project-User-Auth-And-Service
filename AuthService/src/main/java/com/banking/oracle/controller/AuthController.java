@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.banking.oracle.controller.model.response.TokenResponseModel;
+import com.banking.oracle.dao.User;
+import com.banking.oracle.dao.UserDAO;
 import com.banking.oracle.dto.AuthRequest;
 import com.banking.oracle.service.AuthService;
 
@@ -23,16 +26,22 @@ public class AuthController {
 	private AuthService service;
 
 	@Autowired
+	private UserDAO userDAO;
+
+	@Autowired
 	private AuthenticationManager authenticationManager;
 
 	@PostMapping("/token")
-	public String getToken(@RequestBody AuthRequest authRequest) {
+	public ResponseEntity<TokenResponseModel> getToken(@RequestBody AuthRequest authRequest) {
 		Authentication authenticate = authenticationManager.authenticate(
 				new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
+		User user = userDAO.get(authRequest.getUsername());
+
 		if (authenticate.isAuthenticated()) {
-			return service.generateToken(authRequest.getUsername());
+			String token = service.generateToken(authRequest.getUsername());
+			return new ResponseEntity<>(new TokenResponseModel(token, user.getUserId()), HttpStatus.OK);
 		} else {
-			throw new RuntimeException("invalid access");
+			return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
 		}
 	}
 
